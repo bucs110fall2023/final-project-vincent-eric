@@ -13,11 +13,13 @@
 ## Project Description
 
 << Give an overview of your project >>
-
+We want to create a video game simulatiion of a fighting game with unique characters
 ***    
 
 ## GUI Design
-
+from top to bottom-
+Health bars, stamina, and visual graphics 
+extras: sound effects, interactive gui, and specific effects
 ### Initial Design
 
 ![initial gui](assets/gui.jpg)
