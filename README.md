@@ -8,7 +8,7 @@
 
 << List team member names >>
 
-***
+***Vincent You and Eric Li
 
 ## Project Description
 
