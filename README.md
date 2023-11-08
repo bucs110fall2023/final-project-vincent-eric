@@ -32,11 +32,11 @@ extras: sound effects, interactive gui, and specific effects
 
 ### Features
 
-1. << Feature 1 >>
-2. << Feature 2 >>
-3. << Feature 3 >>
-4. << Feature 4 >>
-5. << Feature 5 >>
+1. Movement System
+2. Combat System
+3. End of Round Screen
+4. HUD elements that reflect what happens ingame
+5. Start Menu
 
 ### Classes
 
