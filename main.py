@@ -1,5 +1,5 @@
 import pygame
-from controller import Controller
+from src.controller import Controller
 
 def main():
     pygame.init()
