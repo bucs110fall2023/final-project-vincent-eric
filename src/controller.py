@@ -1,10 +1,12 @@
 import pygame
+from src.button import Button
 
 class Controller:
 
     def __init__(self):
         pygame.init()
         self.display = pygame.display.set_mode()
+        self.bgcolor = "blue"
         self.state = "MENU"
         
 
@@ -21,7 +23,13 @@ class Controller:
 
     def menuloop(self):
         print("menu")
+        start = Button(450, 200, 'assets/PlayButton.png')
+        quit = Button(450, 400, 'assets/QuitButton.png')
         while self.state == "MENU":
+            self.display.fill(self.bgcolor)
+            start.place(self.display)
+            quit.place(self.display)
+            pygame.display.flip()
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     self.state = "GAME"
