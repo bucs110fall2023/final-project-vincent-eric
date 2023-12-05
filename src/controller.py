@@ -44,6 +44,7 @@ class Controller:
       #redraw
       
     def gameloop(self):
+        background = pygame.image.load("assets/background picture.png")
         print("game")
         while self.state == "GAME":
             for event in pygame.event.get():
