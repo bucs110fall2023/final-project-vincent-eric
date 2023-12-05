@@ -6,33 +6,37 @@ class Controller:
     def __init__(self):
         pygame.init()
         self.display = pygame.display.set_mode()
-        self.bgcolor = "blue"
+        self.bgcolor = "light blue"
         self.state = "MENU"
+        self.run = True
         
 
     def mainloop(self):
-        while True:
+        while self.run == True:
             if self.state == "GAME":
                 self.gameloop()
             elif self.state == "END":
                 self.gameoverloop()
-            else:
+            elif self.state == "MENU":
                 self.menuloop()
+        pygame.quit()
+        
   
   ### below are some sample loop states ###
 
     def menuloop(self):
-        print("menu")
-        start = Button(450, 200, 'assets/PlayButton.png')
+        play = Button(450, 200, 'assets/PlayButton.png')
         quit = Button(450, 400, 'assets/QuitButton.png')
-        while self.state == "MENU":
-            self.display.fill(self.bgcolor)
-            start.place(self.display)
-            quit.place(self.display)
-            pygame.display.flip()
-            for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    self.state = "GAME"
+        self.display.fill(self.bgcolor)
+        play.place(self.display)
+        quit.place(self.display)
+        pygame.display.flip()
+        for event in pygame.event.get():
+            if play.clicked() == True:
+                self.state = "GAME"
+            if quit.clicked() == True:
+                self.run = False
+    
       #event loop
 
       #update data
