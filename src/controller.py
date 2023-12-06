@@ -1,59 +1,72 @@
 import pygame
 from src.button import Button
+from src.character import Character
 
 class Controller:
 
     def __init__(self):
         pygame.init()
-        self.bgcolor = "light blue"
-        self.state = "MENU"
-        self.run = True
+        
+        # Load Assets
         self.background = pygame.image.load("assets/background picture.png")
+        self.play = Button(450, 200, 'assets/PlayButton.png')
+        self.quit = Button(450, 400, 'assets/QuitButton.png')
+        
+        # Load Display
         width = self.background.get_width()
         height = self.background.get_height()
         self.display = pygame.display.set_mode((width, height))
         
+        # Load Players
+        self.p1 = Character('assets/ReplayButton.png', self.display, 70, 350)
+
+        self.bgcolor = "light blue"
+        
+        self.state = "MENU"
+      
 
     def mainloop(self):
-        while self.run == True:
+        while True:
             if self.state == "GAME":
                 self.gameloop()
             elif self.state == "END":
                 self.gameoverloop()
             elif self.state == "MENU":
                 self.menuloop()
-        pygame.quit()
         
-  
-  ### below are some sample loop states ###
+        
 
     def menuloop(self):
-        play = Button(450, 200, 'assets/PlayButton.png')
-        quit = Button(450, 400, 'assets/QuitButton.png')
         self.display.fill(self.bgcolor)
-        play.place(self.display)
-        quit.place(self.display)
+        self.play.place(self.display)
+        self.quit.place(self.display)
         pygame.display.flip()
         for event in pygame.event.get():
-            if play.clicked() == True:
-                self.state = "GAME"
-            if quit.clicked() == True:
-                self.run = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if self.play.clicked() == True:
+                    self.state = "GAME"
+                if self.quit.clicked() == True:
+                    pygame.quit()
+                    exit()
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+                
+                
     
-      #event loop
-
-      #update data
-
-      #redraw
       
     def gameloop(self):
         self.display.blit(self.background, (0,0))
-        pygame.display.flip()
-        print("game")
-        while self.state == "GAME":
-            for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    self.state = "END"
+        self.p1.move(pygame.K_a, pygame.K_d, pygame.K_s)
+        self.p1.place()
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            # for event in pygame.event.get():
+                # if event.type == pygame.MOUSEBUTTONDOWN:
+                #     self.state = "END"
       #event loop
 
       #update data
