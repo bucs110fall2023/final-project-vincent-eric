@@ -5,10 +5,13 @@ class Controller:
 
     def __init__(self):
         pygame.init()
-        self.display = pygame.display.set_mode()
         self.bgcolor = "light blue"
         self.state = "MENU"
         self.run = True
+        self.background = pygame.image.load("assets/background picture.png")
+        width = self.background.get_width()
+        height = self.background.get_height()
+        self.display = pygame.display.set_mode((width, height))
         
 
     def mainloop(self):
@@ -44,7 +47,8 @@ class Controller:
       #redraw
       
     def gameloop(self):
-        background = pygame.image.load("assets/background picture.png")
+        self.display.blit(self.background, (0,0))
+        pygame.display.flip()
         print("game")
         while self.state == "GAME":
             for event in pygame.event.get():
