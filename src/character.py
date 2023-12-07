@@ -16,7 +16,7 @@ class Character(pygame.sprite.Sprite):
         self.gravity = 0.5
         self.jump_height = 15
         
-        # Movement States
+        # Jump States
         self.is_jump = False
         
         # Invisible Wall
@@ -43,7 +43,7 @@ class Character(pygame.sprite.Sprite):
     
     def move(self, left, right, up): #left, right, jump are pygame inputs
  
-        # Move and Jump
+        # Movement Keybinds
         keypress = pygame.key.get_pressed()
         if keypress[left] == True:
             self.rect.x = self.rect.x - self.x_velocity
@@ -52,7 +52,8 @@ class Character(pygame.sprite.Sprite):
         if self.is_jump == False:
             if keypress[up] == True:
                 self.is_jump = True
-            
+        
+        # Jump
         if self.is_jump == True:
             self.rect.y =  self.rect.y - self.y_velocity
             self.y_velocity = self.y_velocity - self.gravity
