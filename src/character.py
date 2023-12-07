@@ -6,6 +6,7 @@ WHITE = (255,255,255)
 
 class Character(pygame.sprite.Sprite):
     def __init__(self, image, display, x = 0, y = 0, health = 100):
+        pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(str(image))
         self.display = display
         self.x = x

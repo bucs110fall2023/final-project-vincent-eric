@@ -11,6 +11,11 @@ P1_INITPOS = (70, 350)
 P2_INITPOS = (600, 350)
 BUTTON1_POS = (240, 200)
 BUTTON2_POS = (240, 400)
+BACKGROUND_IMG = 'assets/background picture.png'
+PLAY_IMG = 'assets/buttons/PlayButton.png'
+QUIT_IMG = 'assets/buttons/QuitButton.png'
+REPLAY_IMG = 'assets/buttons/ReplayButton.png'
+RETURN_IMG = 'assets/buttons/ReturnButton.png'
 
 class Controller:
 
@@ -18,11 +23,11 @@ class Controller:
         pygame.init()
         
         # Load Assets
-        self.bg = pygame.image.load("assets/background picture.png")
-        self.play = Button(BUTTON1_POS[0], BUTTON1_POS[1], 'assets/buttons/PlayButton.png')
-        self.quit = Button(BUTTON2_POS[0], BUTTON2_POS[1], 'assets/buttons/QuitButton.png')
-        self.replay = Button(BUTTON1_POS[0], BUTTON1_POS[1], 'assets/buttons/ReplayButton.png')
-        self.return_button = Button(BUTTON2_POS[0], BUTTON2_POS[1], 'assets/buttons/ReturnButton.png')
+        self.bg = pygame.image.load(BACKGROUND_IMG)
+        self.play = Button(BUTTON1_POS[0], BUTTON1_POS[1], PLAY_IMG)
+        self.quit = Button(BUTTON2_POS[0], BUTTON2_POS[1], QUIT_IMG)
+        self.replay = Button(BUTTON1_POS[0], BUTTON1_POS[1], REPLAY_IMG)
+        self.return_button = Button(BUTTON2_POS[0], BUTTON2_POS[1], RETURN_IMG)
         
         # Load Display
         width = self.bg.get_width()
@@ -30,9 +35,8 @@ class Controller:
         self.display = pygame.display.set_mode((width, height))
         
         # Load Players
-        self.start_health = 100
-        self.p1 = Character('assets/Medieval King Pack/Idle.png', self.display, P1_INITPOS[0], P1_INITPOS[1], self.start_health)
-        self.p2 = Character('assets/Medieval King Pack 2/Sprites/Idle.png', self.display, P2_INITPOS[0], P2_INITPOS[1], self.start_health)
+        self.p1 = Character('assets/Medieval King Pack/Idle.png', self.display, P1_INITPOS[0], P1_INITPOS[1])
+        self.p2 = Character('assets/Medieval King Pack 2/Sprites/Idle.png', self.display, P2_INITPOS[0], P2_INITPOS[1])
         
         # Logic
         self.p1_wins = 0
@@ -80,6 +84,7 @@ class Controller:
         p2_health_coord = (550, 25)
         
         self.display.blit(self.bg, (0,0))
+
         
         self.p1.move(p1_binds[0], p1_binds[1], p1_binds[2])
         self.p1.place()
@@ -106,16 +111,16 @@ class Controller:
         if self.is_p1win == 1:
             self.is_p1win == 0
             self.p1_wins = self.p1_wins + 1
-            self.p1 = Character('assets/Medieval King Pack/Idle.png', self.display, P1_INITPOS[0], P1_INITPOS[1], self.start_health)
-            self.p2 = Character('assets/Medieval King Pack 2/Sprites/Idle.png', self.display, P2_INITPOS[0], P2_INITPOS[1], self.start_health)
+            self.p1 = Character('assets/Medieval King Pack/Idle.png', self.display, P1_INITPOS[0], P1_INITPOS[1])
+            self.p2 = Character('assets/Medieval King Pack 2/Sprites/Idle.png', self.display, P2_INITPOS[0], P2_INITPOS[1])
             self.state = "GAME"
             if self.p1_wins == 2:
                 self.state = "END"
         elif self.is_p2win == 1:
             self.is_p2win == 0
             self.p2_wins = self.p2_wins + 1
-            self.p1 = Character('assets/Medieval King Pack/Idle.png', self.display, P1_INITPOS[0], P1_INITPOS[1], self.start_health)
-            self.p2 = Character('assets/Medieval King Pack 2/Sprites/Idle.png', self.display, P2_INITPOS[0], P2_INITPOS[1], self.start_health)
+            self.p1 = Character('assets/Medieval King Pack/Idle.png', self.display, P1_INITPOS[0], P1_INITPOS[1])
+            self.p2 = Character('assets/Medieval King Pack 2/Sprites/Idle.png', self.display, P2_INITPOS[0], P2_INITPOS[1])
             self.state = "GAME"
             if self.p2_wins == 2:
                 self.state = "END"
