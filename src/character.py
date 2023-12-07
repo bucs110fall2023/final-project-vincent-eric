@@ -31,8 +31,7 @@ class Character(pygame.sprite.Sprite):
         
         self.rect = pygame.Rect((x, y, 80, 100))
 
-        #health
-        self.health = 100
+    
 ## character class (will have to be sprite) for both players
     # def __init__(self, player, x, y, flip, data, sprite_sheet, animation_steps, sound):
     # need to finish
