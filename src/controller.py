@@ -12,8 +12,8 @@ class Controller:
         
         # Load Assets
         self.bg = pygame.image.load("assets/background picture.png")
-        self.play = Button(450, 200, 'assets/buttons/PlayButton.png')
-        self.quit = Button(450, 400, 'assets/buttons/QuitButton.png')
+        self.play = Button(240, 200, 'assets/buttons/PlayButton.png')
+        self.quit = Button(240, 400, 'assets/buttons/QuitButton.png')
         
         # Load Display
         width = self.bg.get_width()
