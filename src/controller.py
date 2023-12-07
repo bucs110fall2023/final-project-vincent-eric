@@ -30,7 +30,7 @@ P1_FALL = 'assets/Medieval King Pack/Fall.png'
 P2_IDLE = 'assets/Medieval King Pack 2/Sprites/Idle.png'
 P2_RUN = 'assets/Medieval King Pack 2/Sprites/Run.png'
 P2_ATTACK = 'assets/Medieval King Pack 2/Sprites/Attack2.png'
-P2_JUMP = 'assets/Medieval King Pack 2/Sprites/Jump.png'
+P2_JUMP = 'assets/Medieval King Pack 2/ s/Jump.png'
 P2_FALL = 'assets/Medieval King Pack 2/Sprites/Fall.png'
 
 
@@ -52,15 +52,24 @@ class Controller:
         height = self.bg.get_height()
         self.display = pygame.display.set_mode((width, height))
         
-        # Load Players
-        # med_king_steps = [10,8,1,4,3,9,4,7]
-        # med_king_steps_2 = [8,8,1,5,3,9,4,7]
-        
+        # Load Players        
         self.p1 = Character(P1_IDLE, self.display, P1_INITPOS[0], P1_INITPOS[1])
         self.p2 = Character(P2_IDLE, self.display, P2_INITPOS[0], P2_INITPOS[1])
         
-       
+       #creating an animation list 
+        animation_list = []
+        animation_steps = 6
+        last_update = pygame.time.get_ticks()
+        animation_cool = 350
+        frame = 0
         
+        for x in range(animation_steps):
+            animation_list.append(self.sprite_sheet.get_image(0,24,24,3,"black"))
+        
+        
+        #show each frame image
+        self.display(animation_list[x], (0 , 0))
+            
         # Logic
         self.p1_wins = 0
         self.p2_wins = 0
