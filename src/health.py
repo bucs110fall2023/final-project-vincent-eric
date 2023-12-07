@@ -1,5 +1,4 @@
 import pygame
-from src.character import Character
 
 YELLOW = (255, 255, 0)
 RED = (255, 0, 0)
