@@ -1,4 +1,5 @@
 import pygame
+from src.Spritesheet import SpriteSheet
 from src.button import Button
 from src.character import Character
 
@@ -14,6 +15,7 @@ P1_INITPOS = (70, 350)
 P2_INITPOS = (600, 350)
 BUTTON1_POS = (240, 200)
 BUTTON2_POS = (240, 400)
+
 
 BACKGROUND_IMG = 'assets/background picture.png'
 PLAY_IMG = 'assets/buttons/PlayButton.png'
@@ -64,11 +66,20 @@ class Controller:
         frame = 0
         
         for x in range(animation_steps):
-            animation_list.append(self.sprite_sheet.get_image(0,24,24,3,"black"))
+            animation_list.append(SpriteSheet.get_image(x, 24,24, 3, YELLOW))
         
-        
+        run = True
+        while run:
+            
+            #updating animation
+            current_time = pygame.time.get_ticks()
+            if current_time > last_update >= animation_cool:
+                frame+= 1
+                last_update = current_time
+                if frame >= len(animation_list):
+                    frame = 0
         #show each frame image
-        self.display(animation_list[x], (0 , 0))
+        self.display(animation_list[frame], (0 , 0))
             
         # Logic
         self.p1_wins = 0
