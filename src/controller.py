@@ -22,7 +22,17 @@ REPLAY_IMG = 'assets/buttons/ReplayButton.png'
 RETURN_IMG = 'assets/buttons/ReturnButton.png'
 
 P1_IDLE = 'assets/Medieval King Pack/Idle.png'
+P1_RUN = 'assets/Medieval King Pack/Run/png'
+P1_ATTACK = 'assets/Medieval King Pack/Attack_1.png'
+P1_JUMP = 'assets/Medieval King Pack/Jump.png'
+P1_FALL = 'assets/Medieval King Pack/Fall.png'
+
 P2_IDLE = 'assets/Medieval King Pack 2/Sprites/Idle.png'
+P2_RUN = 'assets/Medieval King Pack 2/Sprites/Run.png'
+P2_ATTACK = 'assets/Medieval King Pack 2/Sprites/Attack2.png'
+P2_JUMP = 'assets/Medieval King Pack 2/Sprites/Jump.png'
+P2_FALL = 'assets/Medieval King Pack 2/Sprites/Fall.png'
+
 
 class Controller:
 
