@@ -11,9 +11,6 @@ class Health:
     def health_bar(self,x,y):
         pygame.draw.rect(self.display , YELLOW , (x, y, 400, 30))
     
-    # fighter_1 = self.p1
-    # fighter_2 = self.p2
-
-#     health_bar(fighter_1.health, 20,20)
-#     health_bar(fighter_2.health, 500,20)
-# ## health bar
+    # health_bar(self.health, 20,20)
+    # health_bar(fighter_2.health, 500,20)
+## health bar
