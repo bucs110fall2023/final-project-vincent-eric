@@ -23,8 +23,6 @@ class Controller:
         # Load Players
         self.p1 = Character('assets/Medieval King Pack/Idle.png', self.display, 70, 350)
         self.p2 = Character('assets/Medieval King Pack 2/Sprites/Idle.png', self.display, 600, 350)
-    
-        self.bgcolor = "light blue"
         
         self.state = "MENU"
       
@@ -41,7 +39,8 @@ class Controller:
         
 
     def menuloop(self):
-        self.display.fill(self.bgcolor)
+        menu_color = (173, 216, 230)
+        self.display.fill(menu_color)
         self.play.place(self.display)
         self.quit.place(self.display)
         pygame.display.flip()
@@ -60,9 +59,12 @@ class Controller:
     
       
     def gameloop(self):
-        self.display.blit(self.bg, (0,0))
         p1_binds = [pygame.K_a, pygame.K_d, pygame.K_s, pygame.K_x]
-        p2_binds = [pygame.K_j, pygame.K_l, pygame.K_s, pygame.K_n]
+        p1_health_coord = (25, 25)
+        p2_binds = [pygame.K_j, pygame.K_l, pygame.K_k, pygame.K_n]
+        p2_health_coord = (550, 25)
+        
+        self.display.blit(self.bg, (0,0))
         
         self.p1.move(p1_binds[0], p1_binds[1], p1_binds[2])
         self.p1.place()
@@ -72,8 +74,8 @@ class Controller:
         self.p1.attack(p1_binds[3], self.p2)
         self.p2.attack(p2_binds[3], self.p1)
         
-        self.p1.health_bar(25,25)
-        self.p2.health_bar(550,25)
+        self.p1.health_bar(p1_health_coord[0], p1_health_coord[1])
+        self.p2.health_bar(p2_health_coord[0], p2_health_coord[1])
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -89,8 +91,7 @@ class Controller:
 
       #update data
     
-        self.p1.health_bar(70,500)
-        self.p2.health_bar(600,500)
+
       #redraw
     
     def gameoverloop(self):

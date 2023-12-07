@@ -10,45 +10,40 @@ class Character(pygame.sprite.Sprite):
         self.display = display
         self.x = x
         self.y = y
-        
-        # Physics Data
-        self.x_velocity = 3
-        self.y_velocity = 1.5
-        self.gravity = 0.5
-        self.jump_height = 15
-        
-        # Jump States
-        self.is_jump = False
-        
-        # Invisible Wall
-        self.x_min = 0
-        self.x_max = self.display.get_width()
-        self.y_min = 0
-        self.y_max = 450
-        
-        # Attack States
-        self.is_attack = False
-        
-        
         self.rect = pygame.Rect((x, y, 80, 100))
+        
+        self.y_velocity = 1.5
+        
+        # States
+        self.is_jump = False
+        self.is_attack = False
+        self.flip = False
 
         #health for characters
         self.health = 100
-        #to make sure they can attack both sides
-        self.flip = False
 
         
     def place(self):
         pygame.draw.rect(self.display, (255, 0, 0), self.rect)
     
     def move(self, left, right, up): #left, right, jump are pygame inputs
- 
+        # Physics Data
+        x_velocity = 3
+        gravity = 0.5
+        jump_height = 15
+        
+        # Invisible Wall
+        x_min = 0
+        x_max = self.display.get_width()
+        y_min = 0
+        y_max = 450
+        
         # Movement Keybinds
         keypress = pygame.key.get_pressed()
         if keypress[left] == True:
-            self.rect.x = self.rect.x - self.x_velocity
+            self.rect.x = self.rect.x - x_velocity
         if keypress[right] == True:
-            self.rect.x = self.rect.x + self.x_velocity
+            self.rect.x = self.rect.x + x_velocity
         if self.is_jump == False:
             if keypress[up] == True:
                 self.is_jump = True
@@ -56,9 +51,9 @@ class Character(pygame.sprite.Sprite):
         # Jump
         if self.is_jump == True:
             self.rect.y =  self.rect.y - self.y_velocity
-            self.y_velocity = self.y_velocity - self.gravity
-            if self.y_velocity < -self.jump_height:
-                self.y_velocity = self.jump_height
+            self.y_velocity = self.y_velocity - gravity
+            if self.y_velocity < -jump_height:
+                self.y_velocity = jump_height
                 self.is_jump = False
         
         # Players Always Facing Each Other
@@ -66,14 +61,14 @@ class Character(pygame.sprite.Sprite):
                 
         # Barrier
                
-        if self.rect.left < self.x_min:
-            self.rect.left = self.x_min
-        if self.rect.right > self.x_max:
-            self.rect.right = self.x_max
-        if self.rect.top < self.y_min:
-            self.rect.top = self.y_min
-        if self.rect.bottom > self.y_max:
-            self.rect.bottom = self.y_max
+        if self.rect.left < x_min:
+            self.rect.left = x_min
+        if self.rect.right > x_max:
+            self.rect.right = x_max
+        if self.rect.top < y_min:
+            self.rect.top = y_min
+        if self.rect.bottom > y_max:
+            self.rect.bottom = y_max
         
     def attack(self, attack, target):
         rect_attack = pygame.Rect(self.rect.centerx, self.rect.y, 1.5 * self.rect.width, self.rect.height)
