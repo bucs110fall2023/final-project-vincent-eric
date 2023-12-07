@@ -69,10 +69,14 @@ class Controller:
 
         self.p1.attack(pygame.K_x, self.p2)
         
+        self.p1.health_bar(70,500)
+        self.p2.health_bar(600,500)
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+
                 
         pygame.display.update()
             # for event in pygame.event.get():
@@ -81,9 +85,7 @@ class Controller:
       #event loop
 
       #update data
-    
-        self.p1.health_bar(70,500)
-        self.p2.health_bar(600,500)
+
       #redraw
     
     def gameoverloop(self):
