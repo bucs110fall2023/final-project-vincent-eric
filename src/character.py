@@ -5,7 +5,7 @@ RED = (255, 0, 0)
 WHITE = (255,255,255)
 
 class Character(pygame.sprite.Sprite):
-    def __init__(self, image, display, x = 0, y = 0):
+    def __init__(self, image, display, x = 0, y = 0, health = 100):
         self.image = pygame.image.load(str(image))
         self.display = display
         self.x = x
@@ -20,9 +20,8 @@ class Character(pygame.sprite.Sprite):
         self.is_jump = 0
         self.is_attack = 0
         self.flip = 0
-
-        #health for characters
-        self.health = 100
+        
+        self.health = health
 
         
     def place(self):
@@ -79,16 +78,13 @@ class Character(pygame.sprite.Sprite):
         #Attack
         shift_rect_attack = 2 * self.width * self.flip
         rect_attack = pygame.Rect(self.rect.centerx - shift_rect_attack, self.rect.y, 1.5 * self.rect.width, self.rect.height)
-        hit = 0
         
         keypress = pygame.key.get_pressed()
         pressed = keypress[attack]
         if pressed == 1 and self.is_attack == 0:
             pygame.draw.rect(self.display, (0, 255, 0), rect_attack)
             if rect_attack.colliderect(target.rect):
-                hit = 1
                 target.health -= 10
-                print(hit)
         self.is_attack = pressed
         
     def health_bar(self, x = 0, y = 0):
@@ -96,6 +92,7 @@ class Character(pygame.sprite.Sprite):
         pygame.draw.rect(self.display , WHITE , (x - 2, y - 2, 404, 34))
         pygame.draw.rect(self.display , RED , (x, y, 400, 30))
         pygame.draw.rect(self.display , YELLOW , (x, y, 400 * ratio, 30))
+        return ratio
         
         
 
