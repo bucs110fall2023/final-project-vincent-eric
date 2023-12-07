@@ -91,8 +91,7 @@ class Controller:
         
         if self.p1.health_bar(p1_health_coord[0], p1_health_coord[1]) == 0:
             self.is_p2win = 1
-            self.state = "ROUND"
-            
+            self.state = "ROUND"     
         if self.p2.health_bar(p2_health_coord[0], p2_health_coord[1]) == 0:
             self.is_p1win = 1
             self.state = "ROUND"
@@ -112,7 +111,7 @@ class Controller:
             self.state = "GAME"
             if self.p1_wins == 2:
                 self.state = "END"
-        if self.is_p2win == 1:
+        elif self.is_p2win == 1:
             self.is_p2win == 0
             self.p2_wins = self.p2_wins + 1
             self.p1 = Character('assets/Medieval King Pack/Idle.png', self.display, P1_INITPOS[0], P1_INITPOS[1], self.start_health)
@@ -126,6 +125,10 @@ class Controller:
                 pygame.quit()
                 exit()
         pygame.display.update()
+        
+        print('round end')
+        print(f'player 1 has {self.p1_wins} wins')
+        print(f'player 2 has {self.p2_wins} wins')
             
     
     def gameoverloop(self):
