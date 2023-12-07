@@ -19,6 +19,7 @@ class Controller:
         
         # Load Players
         self.p1 = Character('assets/ReplayButton.png', self.display, 70, 350)
+        self.p2 = Character('assets/ReturnButton.png', self.display, 600, 350)
 
         self.bgcolor = "light blue"
         
@@ -57,13 +58,20 @@ class Controller:
       
     def gameloop(self):
         self.display.blit(self.background, (0,0))
+        
         self.p1.move(pygame.K_a, pygame.K_d, pygame.K_s)
         self.p1.place()
-        pygame.display.update()
+        self.p2.move(pygame.K_j, pygame.K_l, pygame.K_k)
+        self.p2.place()
+
+        self.p1.attack(pygame.K_x, self.p2)
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+                
+        pygame.display.update()
             # for event in pygame.event.get():
                 # if event.type == pygame.MOUSEBUTTONDOWN:
                 #     self.state = "END"

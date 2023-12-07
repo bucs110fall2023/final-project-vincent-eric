@@ -16,7 +16,7 @@ class Character(pygame.sprite.Sprite):
         # Movement States
         self.run_left = False
         self.run_right = False
-        self.jump = False
+        self.is_jump = False
         self.press = False
         
         # Invisible Wall
@@ -24,6 +24,9 @@ class Character(pygame.sprite.Sprite):
         self.x_max = self.display.get_width()
         self.y_min = 0
         self.y_max = 450
+        
+        # Attack States
+        self.is_attack = False
         
         
         self.rect = pygame.Rect((x, y, 80, 100))
@@ -47,9 +50,9 @@ class Character(pygame.sprite.Sprite):
             self.run_right = True
         else:
             self.run_right = False
-        if self.jump == False:
+        if self.is_jump == False:
             if keypress[up] == True:
-                self.jump = True
+                self.is_jump = True
 
 
         if self.run_left == True:
@@ -58,13 +61,11 @@ class Character(pygame.sprite.Sprite):
         if self.run_right == True:
             self.rect.x = self.rect.x + self.x_velocity
         
-        if self.jump == True:
+        if self.is_jump == True:
             self.rect.y =  self.rect.y - self.y_velocity
             self.y_velocity = self.y_velocity - self.gravity
             if self.y_velocity < -self.jump_height:
                 self.y_velocity = self.jump_height
-                self.jump = False
-                 
                 
         # Barrier
                
@@ -77,6 +78,22 @@ class Character(pygame.sprite.Sprite):
         if self.rect.bottom > self.y_max:
             self.rect.bottom = self.y_max
 
+    def attack(self, attack, target):
+        rect_attack = pygame.Rect(self.rect.centerx, self.rect.y, 1.5 * self.rect.width, self.rect.height)
+        hit = False
+            
+        keypress = pygame.key.get_pressed()
+        
+        pressed = keypress[attack]
+        if pressed == True and self.is_attack == False:
+            pygame.draw.rect(self.display, (0, 255, 0), rect_attack)
+            if rect_attack.colliderect(target.rect):
+                hit = True
+                print(hit)
+        self.is_attack = pressed
+
+        
+            
         
         
         
