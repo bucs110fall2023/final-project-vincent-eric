@@ -85,7 +85,7 @@ class Controller:
                 if frame >= len(animation_list):
                     frame = 0   
         #show each frame image
-        self.display(animation_list[frame], (0 , 0))
+        self.display(animation_list[frame], (0 , 0)) #stopped around the part of 17:52
             
         # Logic
         self.p1_wins = 0
