@@ -43,8 +43,13 @@ class Controller:
         self.display = pygame.display.set_mode((width, height))
         
         # Load Players
-        self.p1 = Character(P1_IDLE, self.display, P1_INITPOS[0], P1_INITPOS[1])
-        self.p2 = Character(P2_IDLE, self.display, P2_INITPOS[0], P2_INITPOS[1])
+        med_king_steps = [10,8,1,4,3,9,4,7]
+        med_king_steps_2 = [8,8,1,5,3,9,4,7]
+        
+        self.p1 = Character(P1_IDLE, self.display, P1_INITPOS[0], P1_INITPOS[1], med_king_steps)
+        self.p2 = Character(P2_IDLE, self.display, P2_INITPOS[0], P2_INITPOS[1], med_king_steps_2)
+        
+       
         
         # Logic
         self.p1_wins = 0
