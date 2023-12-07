@@ -4,7 +4,7 @@ RED = (255, 0, 0)
 WHITE = (255,255,255)
 
 class Character(pygame.sprite.Sprite):
-    def __init__(self, image, display, x, y):
+    def __init__(self, image, display, x = 0, y = 0):
         self.image = pygame.image.load(str(image))
         self.display = display
         self.x = x
@@ -16,11 +16,8 @@ class Character(pygame.sprite.Sprite):
         self.gravity = 0.5
         self.jump_height = 15
         
-        # Movement States
-        self.run_left = False
-        self.run_right = False
+        # Jump States
         self.is_jump = False
-        self.press = False
         
         # Invisible Wall
         self.x_min = 0
@@ -47,27 +44,17 @@ class Character(pygame.sprite.Sprite):
     
     def move(self, left, right, up): #left, right, jump are pygame inputs
  
-        # Move and Jump
+        # Movement Keybinds
         keypress = pygame.key.get_pressed()
         if keypress[left] == True:
-            self.run_left = True
-        else:
-            self.run_left = False
+            self.rect.x = self.rect.x - self.x_velocity
         if keypress[right] == True:
-            self.run_right = True
-        else:
-            self.run_right = False
+            self.rect.x = self.rect.x + self.x_velocity
         if self.is_jump == False:
             if keypress[up] == True:
                 self.is_jump = True
-
-
-        if self.run_left == True:
-            self.rect.x = self.rect.x - self.x_velocity
-            
-        if self.run_right == True:
-            self.rect.x = self.rect.x + self.x_velocity
         
+        # Jump
         if self.is_jump == True:
             self.rect.y =  self.rect.y - self.y_velocity
             self.y_velocity = self.y_velocity - self.gravity

@@ -12,8 +12,8 @@ class Controller:
         
         # Load Assets
         self.background = pygame.image.load("assets/background picture.png")
-        self.play = Button(450, 200, 'assets/PlayButton.png')
-        self.quit = Button(450, 400, 'assets/QuitButton.png')
+        self.play = Button(450, 200, 'assets/buttons/PlayButton.png')
+        self.quit = Button(450, 400, 'assets/buttons/QuitButton.png')
         
         # Load Display
         width = self.background.get_width()
@@ -21,8 +21,8 @@ class Controller:
         self.display = pygame.display.set_mode((width, height))
         
         # Load Players
-        self.p1 = Character('assets/ReplayButton.png', self.display, 70, 350)
-        self.p2 = Character('assets/ReturnButton.png', self.display, 600, 350)
+        self.p1 = Character('assets/buttons/ReplayButton.png', self.display, 70, 350)
+        self.p2 = Character('assets/buttons/ReturnButton.png', self.display, 600, 350)
     
         self.bgcolor = "light blue"
         
@@ -76,6 +76,7 @@ class Controller:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+
                 
         pygame.display.update()
             # for event in pygame.event.get():
@@ -85,7 +86,8 @@ class Controller:
 
       #update data
     
-        
+        self.p1.health_bar(70,500)
+        self.p2.health_bar(600,500)
       #redraw
     
     def gameoverloop(self):
