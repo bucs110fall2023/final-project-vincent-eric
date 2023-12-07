@@ -36,7 +36,8 @@ class Character(pygame.sprite.Sprite):
 
         #health for characters
         self.health = 100
-    
+        #to make sure they can attack both sides
+        self.flip = False
 ## character class (will have to be sprite) for both players
     # def __init__(self, player, x, y, flip, data, sprite_sheet, animation_steps, sound):
     # need to finish
@@ -85,6 +86,8 @@ class Character(pygame.sprite.Sprite):
         if self.rect.bottom > self.y_max:
             self.rect.bottom = self.y_max
 
+        #making sure players face each other
+        
     def attack(self, attack, target):
         rect_attack = pygame.Rect(self.rect.centerx, self.rect.y, 1.5 * self.rect.width, self.rect.height)
         hit = False
@@ -99,9 +102,13 @@ class Character(pygame.sprite.Sprite):
                 target.health -= 10
                 print(hit)
         self.is_attack = pressed
-    
+        
     def health_bar(self,x,y):
-        pygame.draw.rect(self.display , YELLOW , (x, y, 400, 30))
+        ratio = self.health / 100
+        pygame.draw.rect(self.display , WHITE , (x-2, y-2, 404, 34))
+        pygame.draw.rect(self.display , RED , (x, y, 400, 30))
+        pygame.draw.rect(self.display , YELLOW , (x, y, 400* ratio, 30))
+        
         
 
         
