@@ -90,6 +90,7 @@ class Character(pygame.sprite.Sprite):
             pygame.draw.rect(self.display, (0, 255, 0), rect_attack)
             if rect_attack.colliderect(target.rect):
                 hit = True
+                target.health -= 10
                 print(hit)
         self.is_attack = pressed
 

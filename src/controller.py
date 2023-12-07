@@ -90,5 +90,12 @@ class Controller:
       #event loop
 
       #update data
-
+      #function to draw the health bar
+    def health_bar(self,x,y):
+          pygame.draw.rect(self.display , (255,255,0), (x,y,400,30))
+    
+    
+    health_bar(self.p1.health, 20,20)
+    health_bar(self.p2.health, 500,20)
+    
       #redraw
