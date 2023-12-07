@@ -1,7 +1,10 @@
 import pygame
 from src.button import Button
 from src.character import Character
-from src.health import Health
+
+YELLOW = (255, 255, 0)
+RED = (255, 0, 0)
+WHITE = (255,255,255)
 class Controller:
 
     def __init__(self):
@@ -78,8 +81,9 @@ class Controller:
       #event loop
 
       #update data
-        self.p1.health_bar(20,20)
-        self.p2.health_bar(580,20)
+    
+        self.p1.health_bar(70,500)
+        self.p2.health_bar(600,500)
       #redraw
     
     def gameoverloop(self):

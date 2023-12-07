@@ -1,4 +1,7 @@
 import pygame
+YELLOW = (255, 255, 0)
+RED = (255, 0, 0)
+WHITE = (255,255,255)
 
 class Character(pygame.sprite.Sprite):
     def __init__(self, image, display, x, y):
@@ -31,6 +34,8 @@ class Character(pygame.sprite.Sprite):
         
         self.rect = pygame.Rect((x, y, 80, 100))
 
+        #health for characters
+        self.health = 100
     
 ## character class (will have to be sprite) for both players
     # def __init__(self, player, x, y, flip, data, sprite_sheet, animation_steps, sound):
@@ -94,6 +99,10 @@ class Character(pygame.sprite.Sprite):
                 target.health -= 10
                 print(hit)
         self.is_attack = pressed
+    
+    def health_bar(self,x,y):
+        pygame.draw.rect(self.display , YELLOW , (x, y, 400, 30))
+        
 
         
             
