@@ -43,12 +43,12 @@ class Controller:
         self.display.fill(menu_color)
         self.play.place(self.display)
         self.quit.place(self.display)
-        pygame.display.flip()
+        pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.play.clicked() == True:
+                if self.play.clicked() == 1:
                     self.state = "GAME"
-                if self.quit.clicked() == True:
+                if self.quit.clicked() == 1:
                     pygame.quit()
                     exit()
             if event.type == pygame.QUIT:

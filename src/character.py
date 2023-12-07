@@ -10,14 +10,16 @@ class Character(pygame.sprite.Sprite):
         self.display = display
         self.x = x
         self.y = y
-        self.rect = pygame.Rect((x, y, 80, 100))
+        self.width = 80
+        self.height = 100
+        self.rect = pygame.Rect((x, y, self.width, self.height))
         
         self.y_velocity = 1.5
         
         # States
-        self.is_jump = False
-        self.is_attack = False
-        self.flip = False
+        self.is_jump = 0
+        self.is_attack = 0
+        self.flip = 0
 
         #health for characters
         self.health = 100
@@ -40,27 +42,23 @@ class Character(pygame.sprite.Sprite):
         
         # Movement Keybinds
         keypress = pygame.key.get_pressed()
-        if keypress[left] == True:
+        if keypress[left] == 1:
             self.rect.x = self.rect.x - x_velocity
-        if keypress[right] == True:
+        if keypress[right] == 1:
             self.rect.x = self.rect.x + x_velocity
-        if self.is_jump == False:
-            if keypress[up] == True:
-                self.is_jump = True
+        if self.is_jump == 0:
+            if keypress[up] == 1:
+                self.is_jump = 1
                 
         # Jump
-        if self.is_jump == True:
+        if self.is_jump == 1:
             self.rect.y =  self.rect.y - self.y_velocity
             self.y_velocity = self.y_velocity - gravity
             if self.y_velocity < -jump_height:
                 self.y_velocity = jump_height
-                self.is_jump = False
-        
-        # Players Always Facing Each Other
-        
+                self.is_jump = 0
                 
-        # Barrier
-               
+        # Invisible Wall       
         if self.rect.left < x_min:
             self.rect.left = x_min
         if self.rect.right > x_max:
@@ -69,23 +67,31 @@ class Character(pygame.sprite.Sprite):
             self.rect.top = y_min
         if self.rect.bottom > y_max:
             self.rect.bottom = y_max
+            
         
     def attack(self, attack, target):
-        rect_attack = pygame.Rect(self.rect.centerx, self.rect.y, 1.5 * self.rect.width, self.rect.height)
-        hit = False
-            
-        keypress = pygame.key.get_pressed()
+        # Face Each Other
+        if self.rect.centerx < target.rect.centerx:
+            self.flip = 0
+        else:
+            self.flip = 1
         
+        #Attack
+        shift_rect_attack = 2 * self.width * self.flip
+        rect_attack = pygame.Rect(self.rect.centerx - shift_rect_attack, self.rect.y, 1.5 * self.rect.width, self.rect.height)
+        hit = 0
+        
+        keypress = pygame.key.get_pressed()
         pressed = keypress[attack]
-        if pressed == True and self.is_attack == False:
+        if pressed == 1 and self.is_attack == 0:
             pygame.draw.rect(self.display, (0, 255, 0), rect_attack)
             if rect_attack.colliderect(target.rect):
-                hit = True
+                hit = 1
                 target.health -= 10
                 print(hit)
         self.is_attack = pressed
         
-    def health_bar(self,x,y):
+    def health_bar(self, x = 0, y = 0):
         ratio = self.health / 100
         pygame.draw.rect(self.display , WHITE , (x - 2, y - 2, 404, 34))
         pygame.draw.rect(self.display , RED , (x, y, 400, 30))
