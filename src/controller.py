@@ -66,10 +66,10 @@ class Controller:
         frame = 0
         
         for x in range(animation_steps):
-            animation_list.append(SpriteSheet.get_image(x, 24,24, 3, YELLOW))
+            animation_list.append(SpriteSheet.get_image(x, 24,24, 3, 1, YELLOW))
         
         run = True
-        while run:
+        while run:  
             
             #updating animation
             current_time = pygame.time.get_ticks()
