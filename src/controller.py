@@ -53,11 +53,11 @@ class Controller:
         self.display = pygame.display.set_mode((width, height))
         
         # Load Players
-        med_king_steps = [10,8,1,4,3,9,4,7]
-        med_king_steps_2 = [8,8,1,5,3,9,4,7]
+        # med_king_steps = [10,8,1,4,3,9,4,7]
+        # med_king_steps_2 = [8,8,1,5,3,9,4,7]
         
-        self.p1 = Character(P1_IDLE, self.display, P1_INITPOS[0], P1_INITPOS[1], med_king_steps)
-        self.p2 = Character(P2_IDLE, self.display, P2_INITPOS[0], P2_INITPOS[1], med_king_steps_2)
+        self.p1 = Character(P1_IDLE, self.display, P1_INITPOS[0], P1_INITPOS[1])
+        self.p2 = Character(P2_IDLE, self.display, P2_INITPOS[0], P2_INITPOS[1])
         
        
         
@@ -106,7 +106,6 @@ class Controller:
         p2_health_coord = (550, 25)
         
         self.display.blit(self.bg, (0,0))
-
         
         self.p1.move(p1_binds[0], p1_binds[1], p1_binds[2])
         self.p1.place(self.display)
