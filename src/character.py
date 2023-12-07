@@ -25,7 +25,8 @@ class Character(pygame.sprite.Sprite):
         self.health = health
 
         
-    def place(self):
+    def place(self, display):
+        display.blit(self.image, (self.x, self.y))
         pygame.draw.rect(self.display, (255, 0, 0), self.rect)
     
     def move(self, left, right, up): #left, right, jump are pygame inputs
