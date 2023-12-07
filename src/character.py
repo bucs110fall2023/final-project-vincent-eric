@@ -66,6 +66,7 @@ class Character(pygame.sprite.Sprite):
             self.y_velocity = self.y_velocity - self.gravity
             if self.y_velocity < -self.jump_height:
                 self.y_velocity = self.jump_height
+                self.is_jump = False
                 
         # Barrier
                
