@@ -11,18 +11,18 @@ class Controller:
         pygame.init()
         
         # Load Assets
-        self.background = pygame.image.load("assets/background picture.png")
+        self.bg = pygame.image.load("assets/background picture.png")
         self.play = Button(450, 200, 'assets/buttons/PlayButton.png')
         self.quit = Button(450, 400, 'assets/buttons/QuitButton.png')
         
         # Load Display
-        width = self.background.get_width()
-        height = self.background.get_height()
+        width = self.bg.get_width()
+        height = self.bg.get_height()
         self.display = pygame.display.set_mode((width, height))
         
         # Load Players
-        self.p1 = Character('assets/buttons/ReplayButton.png', self.display, 70, 350)
-        self.p2 = Character('assets/buttons/ReturnButton.png', self.display, 600, 350)
+        self.p1 = Character('assets/Medieval King Pack/Idle.png', self.display, 70, 350)
+        self.p2 = Character('assets/Medieval King Pack 2/Sprites/Idle.png', self.display, 600, 350)
     
         self.bgcolor = "light blue"
         
@@ -60,14 +60,17 @@ class Controller:
     
       
     def gameloop(self):
-        self.display.blit(self.background, (0,0))
+        self.display.blit(self.bg, (0,0))
+        p1_binds = [pygame.K_a, pygame.K_d, pygame.K_s, pygame.K_x]
+        p2_binds = [pygame.K_j, pygame.K_l, pygame.K_s, pygame.K_n]
         
-        self.p1.move(pygame.K_a, pygame.K_d, pygame.K_s)
+        self.p1.move(p1_binds[0], p1_binds[1], p1_binds[2])
         self.p1.place()
-        self.p2.move(pygame.K_j, pygame.K_l, pygame.K_k)
+        self.p2.move(p2_binds[0], p2_binds[1], p2_binds[2])
         self.p2.place()
 
-        self.p1.attack(pygame.K_x, self.p2)
+        self.p1.attack(p1_binds[3], self.p2)
+        self.p2.attack(p2_binds[3], self.p1)
         
         self.p1.health_bar(25,25)
         self.p2.health_bar(550,25)

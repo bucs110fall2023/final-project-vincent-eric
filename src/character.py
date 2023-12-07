@@ -1,4 +1,5 @@
 import pygame
+
 YELLOW = (255, 255, 0)
 RED = (255, 0, 0)
 WHITE = (255,255,255)
@@ -35,9 +36,7 @@ class Character(pygame.sprite.Sprite):
         self.health = 100
         #to make sure they can attack both sides
         self.flip = False
-## character class (will have to be sprite) for both players
-    # def __init__(self, player, x, y, flip, data, sprite_sheet, animation_steps, sound):
-    # need to finish
+
         
     def place(self):
         pygame.draw.rect(self.display, (255, 0, 0), self.rect)
@@ -53,7 +52,7 @@ class Character(pygame.sprite.Sprite):
         if self.is_jump == False:
             if keypress[up] == True:
                 self.is_jump = True
-        
+                
         # Jump
         if self.is_jump == True:
             self.rect.y =  self.rect.y - self.y_velocity
@@ -61,6 +60,9 @@ class Character(pygame.sprite.Sprite):
             if self.y_velocity < -self.jump_height:
                 self.y_velocity = self.jump_height
                 self.is_jump = False
+        
+        # Players Always Facing Each Other
+        
                 
         # Barrier
                
@@ -72,8 +74,6 @@ class Character(pygame.sprite.Sprite):
             self.rect.top = self.y_min
         if self.rect.bottom > self.y_max:
             self.rect.bottom = self.y_max
-
-        #making sure players face each other
         
     def attack(self, attack, target):
         rect_attack = pygame.Rect(self.rect.centerx, self.rect.y, 1.5 * self.rect.width, self.rect.height)
@@ -92,9 +92,9 @@ class Character(pygame.sprite.Sprite):
         
     def health_bar(self,x,y):
         ratio = self.health / 100
-        pygame.draw.rect(self.display , WHITE , (x-2, y-2, 404, 34))
+        pygame.draw.rect(self.display , WHITE , (x - 2, y - 2, 404, 34))
         pygame.draw.rect(self.display , RED , (x, y, 400, 30))
-        pygame.draw.rect(self.display , YELLOW , (x, y, 400* ratio, 30))
+        pygame.draw.rect(self.display , YELLOW , (x, y, 400 * ratio, 30))
         
         
 
