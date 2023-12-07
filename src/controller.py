@@ -60,14 +60,20 @@ class Controller:
         
        #creating an animation list 
         animation_list = []
-        animation_steps = 6
+        animation_steps = [6,6,11,2,4,6,2,8]
         last_update = pygame.time.get_ticks()
         animation_cool = 350
         frame = 0
-        
-        for x in range(animation_steps):
-            animation_list.append(SpriteSheet.get_image(x, 24,24, 3, 1, YELLOW))
-        
+        step_counter = 0
+
+        #this basically uses the animation steps and moves it frame by frame using the step_counter for every extra frmae
+        for animation in animation_steps:
+            temp_img = []  
+            for _ in range(animation):
+                temp_img.append(SpriteSheet.get_image(step_counter, 24,24, 3, 1, YELLOW))
+                step_counter += 1
+            animation_list.append(temp_img)
+        print(animation_list) #theoretically if this were to work, then it would print out the movement"
         run = True
         while run:  
             
@@ -77,7 +83,7 @@ class Controller:
                 frame+= 1
                 last_update = current_time
                 if frame >= len(animation_list):
-                    frame = 0
+                    frame = 0   
         #show each frame image
         self.display(animation_list[frame], (0 , 0))
             
