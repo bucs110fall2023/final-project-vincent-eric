@@ -1,6 +1,7 @@
 import pygame
 
 class Button(pygame.sprite.Sprite):
+    
     def __init__(self, x, y, image):
         pygame.init()
         self.image = pygame.image.load(str(image))
