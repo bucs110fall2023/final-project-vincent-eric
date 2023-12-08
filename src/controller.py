@@ -106,6 +106,14 @@ class Controller:
                 self.roundloop()
             elif self.state == "MENU":
                 self.menuloop()
+        '''
+        Description:
+            The mainloop that determines which state the game is in.
+        Arguments:
+            None
+        Return:
+            None
+        '''
         
 
     def menuloop(self):
@@ -123,7 +131,14 @@ class Controller:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-                
+        '''
+        Description:
+            Shows the menu when the game state is "MENU"
+        Arguments:
+            None
+        Return:
+            None
+        '''               
       
     def gameloop(self):
         p1_binds = [pygame.K_a, pygame.K_d, pygame.K_s, pygame.K_x]
@@ -153,6 +168,14 @@ class Controller:
                 pygame.quit()
                 exit()
         pygame.display.update()
+        '''
+        Description:
+            Shows the game and allows players to play when state is "GAME"
+        Arguments:
+            None
+        Return:
+            None
+        '''
         
     def roundloop(self):
         if self.is_p1win == 1:
@@ -181,6 +204,14 @@ class Controller:
         print('round end')
         print(f'player 1 has {self.p1_wins} wins')
         print(f'player 2 has {self.p2_wins} wins')
+        '''
+        Description:
+            Resets the player positions when one player wins, unless the player that won has two wins. In that case, that player wins.
+        Arguments:
+            None
+        Return:
+            None
+        '''
             
     
     def gameoverloop(self):
@@ -200,10 +231,11 @@ class Controller:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-      #event loop
-
-      #update data
-      #function to draw the health bar
-    
-    
-      #redraw
+        '''
+        Description:
+            Shows the end of game screen. Offers the choice to replay the game, or return to menu.
+        Arguments:
+            None
+        Return:
+            None
+        '''
