@@ -134,13 +134,14 @@ class Controller:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+        return self.state
         '''
         Description:
             Shows the menu when the game state is "MENU"
         Arguments:
             None
         Return:
-            None
+            Returns state of program as a string.
         '''               
       
     def gameloop(self):
@@ -170,20 +171,18 @@ class Controller:
         self.p2.update()
         
         self.players.draw(self.display)
-        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
         pygame.display.update()
-        self.clock.tick(30)
         '''
         Description:
             Shows the game and allows players to play when state is "GAME"
         Arguments:
             None
         Return:
-            None
+            Returns state of program as a string.
         '''
         
     def roundloop(self):
@@ -208,18 +207,20 @@ class Controller:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+                
         pygame.display.update()
         
         print('round end')
         print(f'player 1 has {self.p1_wins} wins')
         print(f'player 2 has {self.p2_wins} wins')
+        return self.state
         '''
         Description:
             Resets the player positions when one player wins, unless the player that won has two wins. In that case, that player wins.
         Arguments:
             None
         Return:
-            None
+            Returns state of program as a string.
         '''
             
     
@@ -240,11 +241,12 @@ class Controller:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+        return self.state
         '''
         Description:
             Shows the end of game screen. Offers the choice to replay the game, or return to menu.
         Arguments:
             None
         Return:
-            None
+            Returns state of program as a string.
         '''
