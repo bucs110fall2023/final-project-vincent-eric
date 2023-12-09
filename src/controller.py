@@ -145,7 +145,7 @@ class Controller:
         Arguments:
             None
         Return:
-            Returns state of program as a string.
+            Returns the state of the program as a string.
         '''               
       
     def gameloop(self):
@@ -169,7 +169,7 @@ class Controller:
         
         if self.p1.health_bar(p1_health_coord[0], p1_health_coord[1]) == 0:
             self.is_p2win = 1
-            self.state = "ROUND"     
+            self.state = "ROUND"    
         if self.p2.health_bar(p2_health_coord[0], p2_health_coord[1]) == 0:
             self.is_p1win = 1
             self.state = "ROUND"
@@ -183,6 +183,8 @@ class Controller:
                 pygame.quit()
                 exit()
         pygame.display.update()
+        
+        return self.state 
         '''
         Description:
             Shows the game and allows players to play when state is "GAME"
@@ -218,6 +220,7 @@ class Controller:
         print('round end')
         print(f'player 1 has {self.p1_wins} wins')
         print(f'player 2 has {self.p2_wins} wins')
+        
         return self.state
         '''
         Description:
@@ -246,6 +249,7 @@ class Controller:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+                
         return self.state
         '''
         Description:

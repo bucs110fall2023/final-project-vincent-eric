@@ -2,19 +2,17 @@
 :warning: Everything between << >> needs to be replaced (remove << >> after replacing)
 
 # << Project Title >>
+Street Fighter But Medieval
+
 ## CS110 Final Project  << Semester, Year >>
+Fall 2023
 
 ## Team Members
-
-<< List team member names >>
-
 ***Vincent You and Eric Li
 
 ## Project Description
-
-<< Give an overview of your project >>
-We want to create a Street Fighter parody using swords. In other words, Medieval Street Fighter.
-***    
+This is a parody of Street Fighter, but set in Medieval times. In other words, Street Fighter with swords and kings.
+It has a round system, a menu, the actual game, an the end of game screen.
 
 ## GUI Design
 from top to bottom-
