@@ -4,7 +4,7 @@ from src.button import Button
 from src.character import Character
 
 # Constants
-CAPTION = 'streetfighterswords.exe'
+CAPTION = 'streetfightermedievalplsdontsue.exe'
 
 YELLOW = (255, 255, 0)
 RED = (255, 0, 0)
@@ -13,10 +13,11 @@ LIGHT_BLUE = (173, 216, 230)
 
 P1_INITPOS = (70, 350)
 P2_INITPOS = (600, 350)
-BUTTON1_POS = (240, 200)
-BUTTON2_POS = (240, 400)
+BUTTON1_POS = (500, 200)
+BUTTON2_POS = (500, 400)
+ICON_POS = (0, 50)
 
-
+ICON_IMG = 'assets/Icon.png'
 BACKGROUND_IMG = 'assets/background picture.png'
 PLAY_IMG = 'assets/buttons/PlayButton.png'
 QUIT_IMG = 'assets/buttons/QuitButton.png'
@@ -25,15 +26,15 @@ RETURN_IMG = 'assets/buttons/ReturnButton.png'
 
 P1_IDLE = ('assets/Medieval King Pack/Idle.png', 6)
 P1_RUN = ('assets/Medieval King Pack/Run.png',8)
-P1_ATTACK = ('assets/Medieval King Pack/Attack_1.png',4)
-P1_JUMP = ('assets/Medieval King Pack/Jump.png',2)
-P1_FALL = ('assets/Medieval King Pack/Fall.png',2)
+P1_ATTACK = ('assets/Medieval King Pack/Attack_1.png', 4)
+P1_JUMP = ('assets/Medieval King Pack/Jump.png', 2)
+P1_FALL = ('assets/Medieval King Pack/Fall.png', 2)
 
-P2_IDLE = ('assets/Medieval King Pack 2/Sprites/Idle.png',8)
-P2_RUN = ('assets/Medieval King Pack 2/Sprites/Run.png',8)
-P2_ATTACK = ('assets/Medieval King Pack 2/Sprites/Attack2.png',4)
-P2_JUMP = ('assets/Medieval King Pack 2/Sprites/Jump.png',2)
-P2_FALL = ('assets/Medieval King Pack 2/Sprites/Fall.png',2)
+P2_IDLE = ('assets/Medieval King Pack 2/Sprites/Idle.png', 8)
+P2_RUN = ('assets/Medieval King Pack 2/Sprites/Run.png', 8)
+P2_ATTACK = ('assets/Medieval King Pack 2/Sprites/Attack2.png', 4)
+P2_JUMP = ('assets/Medieval King Pack 2/Sprites/Jump.png', 2)
+P2_FALL = ('assets/Medieval King Pack 2/Sprites/Fall.png', 2)
 
 
 class Controller:
@@ -48,6 +49,7 @@ class Controller:
         self.quit = Button(BUTTON2_POS[0], BUTTON2_POS[1], QUIT_IMG)
         self.replay = Button(BUTTON1_POS[0], BUTTON1_POS[1], REPLAY_IMG)
         self.return_button = Button(BUTTON2_POS[0], BUTTON2_POS[1], RETURN_IMG)
+        self.icon = Button(ICON_POS[0], ICON_POS[1], ICON_IMG)
         
         # Load Display
         width = self.bg.get_width()
@@ -95,6 +97,7 @@ class Controller:
         self.p2_wins = 0
         self.is_p1win = 0
         self.is_p2win = 0
+        self.player_needload = False
         
         self.state = "MENU"
 
@@ -123,6 +126,7 @@ class Controller:
         self.display.fill(LIGHT_BLUE)
         self.play.place(self.display)
         self.quit.place(self.display)
+        self.icon.place(self.display)
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -152,10 +156,13 @@ class Controller:
         
         self.display.blit(self.bg, (0,0))
         
+        if self.player_needload == True:
+            self.p1 = Character(P1_IDLE, P1_RUN, P1_ATTACK, P1_JUMP, P1_FALL,  self.display, P1_INITPOS[0], P1_INITPOS[1])
+            self.p2 = Character(P2_IDLE, P2_RUN, P2_ATTACK, P2_JUMP, P2_FALL, self.display, P2_INITPOS[0], P2_INITPOS[1])
+            self.player_needload = False
+        
         self.p1.move(p1_binds[0], p1_binds[1], p1_binds[2])
-        self.p1.place(self.display)
         self.p2.move(p2_binds[0], p2_binds[1], p2_binds[2])
-        self.p2.place(self.display)
 
         self.p1.attack(p1_binds[3], self.p2)
         self.p2.attack(p2_binds[3], self.p1)
@@ -189,20 +196,18 @@ class Controller:
         if self.is_p1win == 1:
             self.is_p1win == 0
             self.p1_wins = self.p1_wins + 1
-            self.p1 = Character(P1_IDLE, self.display, P1_INITPOS[0], P1_INITPOS[1])
-            self.p2 = Character(P2_IDLE, self.display, P2_INITPOS[0], P2_INITPOS[1])
+            self.player_needload = True
             self.state = "GAME"
             if self.p1_wins == 2:
                 self.state = "END"
         elif self.is_p2win == 1:
             self.is_p2win == 0
             self.p2_wins = self.p2_wins + 1
-            self.p1 = Character(P1_IDLE, self.display, P1_INITPOS[0], P1_INITPOS[1])
-            self.p2 = Character(P2_IDLE, self.display, P2_INITPOS[0], P2_INITPOS[1])
+            self.player_needload = True
             self.state = "GAME"
             if self.p2_wins == 2:
                 self.state = "END"
-            
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()

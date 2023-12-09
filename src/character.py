@@ -34,9 +34,9 @@ class Character(pygame.sprite.Sprite):
         self.health = health
 
         
-    def place(self, display):
-        pygame.draw.rect(self.display, (255, 0, 0), self.rect)
-        
+    def place(self):
+        # pygame.draw.rect(self.display, (255, 0, 0), self.rect)
+        pass
     
     def move(self, left, right, up): #left, right, jump are pygame inputs
         # Physics Data
@@ -94,7 +94,6 @@ class Character(pygame.sprite.Sprite):
         pressed = keypress[attack]
         if pressed == 1 and self.is_attack == 0:
             self.animate(self.attackimage)
-            pygame.draw.rect(self.display, (0, 255, 0), rect_attack)
             if rect_attack.colliderect(target.rect):
                 target.health -= 10
         self.is_attack = pressed
