@@ -13,12 +13,12 @@
 ## Project Description
 
 << Give an overview of your project >>
-We want to create a video game simulatiion of a fighting game with unique characters
+We want to create a Street Fighter parody using swords. In other words, Medieval Street Fighter.
 ***    
 
 ## GUI Design
 from top to bottom-
-Health bars, stamina, and visual graphics 
+Menus, Health bars, and visual graphics 
 extras: sound effects, interactive gui, and specific effects
 ### Initial Design
 
@@ -41,6 +41,14 @@ extras: sound effects, interactive gui, and specific effects
 ### Classes
 
 - << You should have a list of each of your classes with a description >>
+Controller Class:
+    Controls and manages the mainloops as well as other loops i.e. menu, game, round, and gameover loops.
+
+Button Class (from button module):
+    Class for buttons with the funcitonality of blitting them onto a surface and returning a value when clicked.
+
+Character Class (from character module):
+    Sprite class for players, containing movement, attacks, and animations.
 
 ## ATP
 

@@ -11,7 +11,7 @@ class SpriteSheet():
 
 	def get_image(self, frame, crop_pos = (0,0), color=None,scale=1):
 		image = pygame.Surface((self.frame_width, self.sprite_height))
-		image.blit(self.sheet,crop_pos, ((frame * self.frame_width),0,  self.frame_width, self.sprite_height))
+		image.blit(self.sheet, crop_pos, ((frame * self.frame_width),0,  self.frame_width, self.sprite_height))
 		image = pygame.transform.scale(image, (self.width*scale, self.height*scale))
 		image.convert_alpha()
 		if color:
