@@ -23,6 +23,8 @@ PLAY_IMG = 'assets/buttons/PlayButton.png'
 QUIT_IMG = 'assets/buttons/QuitButton.png'
 REPLAY_IMG = 'assets/buttons/ReplayButton.png'
 RETURN_IMG = 'assets/buttons/ReturnButton.png'
+P1_WIN_IMG = 'assets/victory images/PLAYER 1 WINS.png'
+P2_WIN_IMG = 'assets/victory images/PLAYER 2 WINS.png'
 
 P1_IDLE = ('assets/Medieval King Pack/Idle.png', 6)
 P1_RUN = ('assets/Medieval King Pack/Run.png',8)
@@ -50,6 +52,8 @@ class Controller:
         self.replay = Button(BUTTON1_POS[0], BUTTON1_POS[1], REPLAY_IMG)
         self.return_button = Button(BUTTON2_POS[0], BUTTON2_POS[1], RETURN_IMG)
         self.icon = Button(ICON_POS[0], ICON_POS[1], ICON_IMG)
+        self.p1win = Button(ICON_POS[0], ICON_POS[1], P1_WIN_IMG)
+        self.p2win = Button(ICON_POS[0], ICON_POS[1], P2_WIN_IMG)
         
         # Load Display
         width = self.bg.get_width()
@@ -93,8 +97,6 @@ class Controller:
         # self.display(animation_list[frame], (0 , 0)) #stopped around the part of 17:52
             
         # Logic
-        self.p1_wins = 0
-        self.p2_wins = 0
         self.is_p1win = 0
         self.is_p2win = 0
         self.player_needload = False
@@ -107,9 +109,7 @@ class Controller:
             if self.state == "GAME":
                 self.gameloop()
             elif self.state == "END":
-                self.gameoverloop()
-            elif self.state == "ROUND":
-                self.roundloop()
+                self.endgameloop()
             elif self.state == "MENU":
                 self.menuloop()
         '''
@@ -169,10 +169,10 @@ class Controller:
         
         if self.p1.health_bar(p1_health_coord[0], p1_health_coord[1]) == 0:
             self.is_p2win = 1
-            self.state = "ROUND"    
+            self.state = "END"    
         if self.p2.health_bar(p2_health_coord[0], p2_health_coord[1]) == 0:
             self.is_p1win = 1
-            self.state = "ROUND"
+            self.state = "END"
             
         self.p1.update()
         self.p2.update()
@@ -193,56 +193,21 @@ class Controller:
         Return:
             Returns state of program as a string.
         '''
-        
-    def roundloop(self):
-        if self.is_p1win == 1:
-            self.is_p1win == 0
-            self.p1_wins = self.p1_wins + 1
-            self.player_needload = True
-            self.state = "GAME"
-            if self.p1_wins == 2:
-                self.state = "END"
-        elif self.is_p2win == 1:
-            self.is_p2win == 0
-            self.p2_wins = self.p2_wins + 1
-            self.player_needload = True
-            self.state = "GAME"
-            if self.p2_wins == 2:
-                self.state = "END"
-        
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
-                
-        pygame.display.update()
-        
-        print('round end')
-        print(f'player 1 has {self.p1_wins} wins')
-        print(f'player 2 has {self.p2_wins} wins')
-        
-        return self.state
-        '''
-        Description:
-            Resets the player positions when one player wins, unless the player that won has two wins. In that case, that player wins.
-        Arguments:
-            None
-        Return:
-            Returns state of program as a string.
-        '''
-            
     
-    def gameoverloop(self):
+    def endgameloop(self):
         self.display.fill(LIGHT_BLUE)
         self.replay.place(self.display)
         self.return_button.place(self.display)
-        
-        self.p1_wins = 0
-        self.p2_wins = 0
+        if self.is_p1win == 1:
+            self.p1win.place(self.display)
+        if self.is_p2win == 1:
+            self.p2win.place(self.display)
+            
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.replay.clicked() == 1:
+                    self.player_needload = True
                     self.state = "GAME"
                 if self.return_button.clicked() == 1:
                     self.state = "MENU"

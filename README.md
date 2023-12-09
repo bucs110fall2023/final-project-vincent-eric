@@ -32,7 +32,7 @@ extras: sound effects, interactive gui, and specific effects
 
 1. Movement System
 2. Combat System
-3. End of Round Screen
+3. End of Game Screen
 4. HUD elements that reflect what happens ingame
 5. Start Menu
 
@@ -91,16 +91,7 @@ Test 4: Health System
 4. Repeat, but this time Player 2 attacks
 Expected: Player 1 and 2 can attack each other, causing the receiving end to lose health, which is reflected in the health bar
 
-Test 5: Round System
-1. As Player 1, attack Player 2 until their health reaches 0
-2. Ensure the round ends, with the point going to Player 1
-3. Repeat, and ensure the game ends when Player 1 wins again
-4. Now repeat, but this time let Player 1 and Player 2 each win one round
-5. Let either player win the remaining round
-6. Ensure the player with the most round victories wins the game
-Expected: Maximum of 3 rounds, with the first player reaching 2 round victories wins the game.
-
-Test 6: Return to Menu
+Test 5: Return to Menu
 1. Play a full game with either player winning
 2. Ensure that at the end of the game, 2 buttons ('replay' and 'exit to menu') appear
 3. Click 'replay' button
