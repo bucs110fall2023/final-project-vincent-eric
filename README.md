@@ -55,7 +55,6 @@ Spritesheet Class (from spritesheet module):
 ## KNOWN BUGS
 1. Animation is not correctly showing when moving, jumping, or attacking.
 2. Animation is not correctly flipping so sprites will always face each other (their attacks will flip, not the images)
-3. When a new round starts, the sprite images are not reset to their original positions. However, their object itself is (In other words, the sprites are still able to move and attack each other. It's just the images are not reflecting that. You can test this by forcing player 1 to move right while spamming the attack button)
 
 ## ATP
 
