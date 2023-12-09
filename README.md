@@ -41,13 +41,16 @@ extras: sound effects, interactive gui, and specific effects
 
 - << You should have a list of each of your classes with a description >>
 Controller Class:
-    Controls and manages the mainloops as well as other loops i.e. menu, game, round, and gameover loops.
+    Controls and manages the mainloops as well as other loops i.e. menu, game, and gameover loops.
 
 Button Class (from button module):
     Class for buttons with the funcitonality of blitting them onto a surface and returning a value when clicked.
 
 Character Class (from character module):
     Sprite class for players, containing movement, attacks, and animations.
+
+Spritesheet Class (from spritesheet module):
+    Takes spritesheets and converts them into images for animation.
 
 ## KNOWN BUGS
 1. Animation is not correctly showing when moving, jumping, or attacking.
