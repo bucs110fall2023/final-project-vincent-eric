@@ -18,10 +18,11 @@ class SpriteSheet():
                 if color:
                         image.set_colorkey("color")
                 return image
-    def get_images(self, crop_pos=(0,0)):
-        image_list = []
-        
-    	for i in range(self.count):
+            
+	def get_images(self,crop_pos=(0,0)):
+		image_list = []
+  
+		for i in range(self.count):
 			image_list.append(self.get_image(i))
 		return image_list
 	
