@@ -64,12 +64,12 @@ class Controller:
         self.clock = pygame.time.Clock()
         
        #creating an animation list 
-        animation_list = []
-        animation_steps = [6,6,11,2,4,6,2,8]
-        last_update = pygame.time.get_ticks()
-        animation_cool = 350
-        frame = 0
-        step_counter = 0
+        # animation_list = []
+        # animation_steps = [6,6,11,2,4,6,2,8]
+        # last_update = pygame.time.get_ticks()
+        # animation_cool = 350
+        # frame = 0
+        # step_counter = 0
 
     #     #this basically uses the animation steps and moves it frame by frame using the step_counter for every extra frmae
         # for animation in animation_steps:

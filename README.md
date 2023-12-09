@@ -69,7 +69,7 @@ Expected: Player 1 and 2 can move and jump independently of each other and both 
 Test 3: Combat System
 1. Press 'X' key
 2. Ensure Player 1 uses an attack
-3. Press 'M' key
+3. Press 'N' key
 4. Ensure Player 2 uses an attack
 Expected: Player 1 and 2 are able to attack independently.
 

@@ -19,6 +19,7 @@ class Character(pygame.sprite.Sprite):
         self.attackimage = SpriteSheet(attackimage[0],attackimage[1],self.width,self.height).get_images()
         self.fallimage = SpriteSheet(fallimage[0],fallimage[1],self.width,self.height).get_images()
         self.image = None
+        self.is_animating = False
         self.display = display
         
         self.y_velocity = 1.5
@@ -33,10 +34,6 @@ class Character(pygame.sprite.Sprite):
         
         self.health = health
 
-        
-    def place(self):
-        # pygame.draw.rect(self.display, (255, 0, 0), self.rect)
-        pass
     
     def move(self, left, right, up): #left, right, jump are pygame inputs
         # Physics Data
@@ -106,9 +103,9 @@ class Character(pygame.sprite.Sprite):
         return ratio
     
     def update(self):
-        self.image = self.image_list[self.image_index]
-        self.image_index+=1
-        if len(self.image_list) == self.image_index:
+        self.image = self.image_list[int(self.image_index)]
+        self.image_index += 0.05
+        if len(self.image_list) <= int(self.image_index):
             self.image_index = 0
             self.image_list = self.idleimage
             
