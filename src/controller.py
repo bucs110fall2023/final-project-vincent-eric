@@ -1,5 +1,5 @@
 import pygame
-from src.Spritesheet import SpriteSheet
+from src.spritesheet import SpriteSheet
 from src.button import Button
 from src.character import Character
 

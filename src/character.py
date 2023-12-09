@@ -1,5 +1,5 @@
 import pygame
-from .Spritesheet import SpriteSheet
+from .spritesheet import SpriteSheet
 
 YELLOW = (255, 255, 0)
 RED = (255, 0, 0)

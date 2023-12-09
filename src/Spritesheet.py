@@ -15,7 +15,7 @@ class SpriteSheet():
 		image = pygame.transform.scale(image, (self.width*scale, self.height*scale))
 		image.convert_alpha()
 		if color:
-			image.set_colorkey(color)
+			image.set_colorkey("color")
 
 		return image
 
