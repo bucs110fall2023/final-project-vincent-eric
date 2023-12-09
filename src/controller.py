@@ -61,9 +61,9 @@ class Controller:
         self.display = pygame.display.set_mode((width, height))
         
         # Load Players        
-        self.p1 = Character(P1_IDLE, P1_RUN, P1_ATTACK, P1_JUMP, P1_FALL,  self.display, P1_INITPOS[0], P1_INITPOS[1])
-        self.p2 = Character(P2_IDLE, P2_RUN, P2_ATTACK, P2_JUMP, P2_FALL, self.display, P2_INITPOS[0], P2_INITPOS[1])
-        self.players = pygame.sprite.Group(self.p1, self.p2)
+        # self.p1 = Character(P1_IDLE, P1_RUN, P1_ATTACK, P1_JUMP, P1_FALL,  self.display, P1_INITPOS[0], P1_INITPOS[1])
+        # self.p2 = Character(P2_IDLE, P2_RUN, P2_ATTACK, P2_JUMP, P2_FALL, self.display, P2_INITPOS[0], P2_INITPOS[1])
+        # self.players = pygame.sprite.Group(self.p1, self.p2)
         
         self.clock = pygame.time.Clock()
             
@@ -103,6 +103,7 @@ class Controller:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.play.clicked() == 1:
                     self.state = "GAME"
+                    self.player_needload = True
                 if self.quit.clicked() == 1:
                     pygame.quit()
                     exit()
@@ -120,17 +121,19 @@ class Controller:
         '''               
       
     def gameloop(self):
+        if self.player_needload == True:
+            self.p1 = Character(P1_IDLE, P1_RUN, P1_ATTACK, P1_JUMP, P1_FALL,  self.display, P1_INITPOS[0], P1_INITPOS[1])
+            self.p2 = Character(P2_IDLE, P2_RUN, P2_ATTACK, P2_JUMP, P2_FALL, self.display, P2_INITPOS[0], P2_INITPOS[1])
+            self.players = pygame.sprite.Group(self.p1, self.p2)
+            self.player_needload = False
+        
+        
         p1_binds = [pygame.K_a, pygame.K_d, pygame.K_s, pygame.K_x]
         p2_binds = [pygame.K_j, pygame.K_l, pygame.K_k, pygame.K_n]
         p1_health_coord = (25, 25)
         p2_health_coord = (550, 25)
         
         self.display.blit(self.bg, (0,0))
-        
-        if self.player_needload == True:
-            self.p1 = Character(P1_IDLE, P1_RUN, P1_ATTACK, P1_JUMP, P1_FALL,  self.display, P1_INITPOS[0], P1_INITPOS[1])
-            self.p2 = Character(P2_IDLE, P2_RUN, P2_ATTACK, P2_JUMP, P2_FALL, self.display, P2_INITPOS[0], P2_INITPOS[1])
-            self.player_needload = False
         
         self.p1.move(p1_binds[0], p1_binds[1], p1_binds[2])
         self.p2.move(p2_binds[0], p2_binds[1], p2_binds[2])

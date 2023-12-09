@@ -10,15 +10,15 @@ class SpriteSheet():
 		self.frame_width = self.sprite_width/count
 
 	def get_image(self, frame, crop_pos = (0,0), color=None,scale=1):
-                image = pygame.Surface((self.frame_width, self.sprite_height)).convert_alpha()
-                image.fill((0,0,0,0))
-                image.blit(self.sheet, crop_pos, ((frame * self.frame_width),0,  self.frame_width, self.sprite_height))
-                image = pygame.transform.scale(image, (self.width*scale, self.height*scale))
-                image.convert_alpha()
-                if color:
-                        image.set_colorkey("color")
+		image = pygame.Surface((self.frame_width, self.sprite_height)).convert_alpha()
+		image.fill((0,0,0,0))
+		image.blit(self.sheet, crop_pos, ((frame * self.frame_width),0,  self.frame_width, self.sprite_height))
+		image = pygame.transform.scale(image, (self.width*scale, self.height*scale))
+		image.convert_alpha()
+		if color:
+			image.set_colorkey("color")
 
-                return image
+		return image
             
 	def get_images(self, crop_pos =(0,0)):
 		image_list = []
