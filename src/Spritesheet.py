@@ -19,8 +19,8 @@ class SpriteSheet():
                         image.set_colorkey("color")
 
                 return image
-            
-	def get_images(self, crop_pos = (0,0)):
+        
+    def get_images(self, crop_pos = (0,0)):
 		image_list = []
   
 		for i in range(self.count):
