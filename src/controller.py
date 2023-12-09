@@ -61,7 +61,7 @@ class Controller:
         self.p2 = Character(P2_IDLE, P2_RUN, P2_ATTACK, P2_JUMP, P2_FALL, self.display, P2_INITPOS[0], P2_INITPOS[1])
         self.players = pygame.sprite.Group(self.p1, self.p2)
         
-        self.clock = pygame.time.Clock()
+        self.clock = pygame.time.Clock(30)
         
        #creating an animation list 
         # animation_list = []
