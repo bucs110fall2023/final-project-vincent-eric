@@ -12,12 +12,13 @@ Fall 2023
 
 ## Project Description
 This is a parody of Street Fighter, but set in Medieval times. In other words, Street Fighter with swords and kings.
-It has a round system, a menu, the actual game, an the end of game screen.
+It has a start menu, the actual game with movement, combat, and health, and an the end of game screen.
 
 ## GUI Design
 from top to bottom-
 Menus, Health bars, and visual graphics 
 extras: sound effects, interactive gui, and specific effects
+
 ### Initial Design
 
 ![initial gui](assets/gui.jpg)

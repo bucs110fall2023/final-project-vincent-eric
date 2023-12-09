@@ -66,35 +66,6 @@ class Controller:
         self.players = pygame.sprite.Group(self.p1, self.p2)
         
         self.clock = pygame.time.Clock()
-        
-       #creating an animation list 
-        # animation_list = []
-        # animation_steps = [6,6,11,2,4,6,2,8]
-        # last_update = pygame.time.get_ticks()
-        # animation_cool = 350
-        # frame = 0
-        # step_counter = 0
-
-    #     #this basically uses the animation steps and moves it frame by frame using the step_counter for every extra frmae
-        # for animation in animation_steps:
-        #     temp_img = []  
-        #     for _ in range(animation):
-        #         temp_img.append(SpriteSheet.get_image(step_counter, 24, 24, 3, 1, YELLOW))
-        #         step_counter += 1
-        #     animation_list.append(temp_img)
-        # print(animation_list) #theoretically if this were to work, then it would print out the movement"
-        # # run = True
-        # # while run:  
-            
-        #     #updating animation
-        # current_time = pygame.time.get_ticks()
-        # if current_time > last_update >= animation_cool:
-        #         frame+= 1
-        #         last_update = current_time
-        #         if frame >= len(animation_list):
-        #             frame = 0   
-        # #show each frame image
-        # self.display(animation_list[frame], (0 , 0)) #stopped around the part of 17:52
             
         # Logic
         self.is_p1win = 0
@@ -202,12 +173,12 @@ class Controller:
             self.p1win.place(self.display)
         if self.is_p2win == 1:
             self.p2win.place(self.display)
-            
+        self.player_needload = True
+        
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.replay.clicked() == 1:
-                    self.player_needload = True
                     self.state = "GAME"
                 if self.return_button.clicked() == 1:
                     self.state = "MENU"
