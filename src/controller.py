@@ -23,17 +23,17 @@ QUIT_IMG = 'assets/buttons/QuitButton.png'
 REPLAY_IMG = 'assets/buttons/ReplayButton.png'
 RETURN_IMG = 'assets/buttons/ReturnButton.png'
 
-P1_IDLE = 'assets/Medieval King Pack/Idle.png'
-P1_RUN = 'assets/Medieval King Pack/Run/png'
-P1_ATTACK = 'assets/Medieval King Pack/Attack_1.png'
-P1_JUMP = 'assets/Medieval King Pack/Jump.png'
-P1_FALL = 'assets/Medieval King Pack/Fall.png'
+P1_IDLE = ('assets/Medieval King Pack/Idle.png', 6)
+P1_RUN = ('assets/Medieval King Pack/Run.png',8)
+P1_ATTACK = ('assets/Medieval King Pack/Attack_1.png',4)
+P1_JUMP = ('assets/Medieval King Pack/Jump.png',2)
+P1_FALL = ('assets/Medieval King Pack/Fall.png',2)
 
-P2_IDLE = 'assets/Medieval King Pack 2/Sprites/Idle.png'
-P2_RUN = 'assets/Medieval King Pack 2/Sprites/Run.png'
-P2_ATTACK = 'assets/Medieval King Pack 2/Sprites/Attack2.png'
-P2_JUMP = 'assets/Medieval King Pack 2/ s/Jump.png'
-P2_FALL = 'assets/Medieval King Pack 2/Sprites/Fall.png'
+P2_IDLE = ('assets/Medieval King Pack 2/Sprites/Idle.png',8)
+P2_RUN = ('assets/Medieval King Pack 2/Sprites/Run.png',8)
+P2_ATTACK = ('assets/Medieval King Pack 2/Sprites/Attack2.png',4)
+P2_JUMP = ('assets/Medieval King Pack 2/Sprites/Jump.png',2)
+P2_FALL = ('assets/Medieval King Pack 2/Sprites/Fall.png',2)
 
 
 class Controller:
@@ -55,37 +55,40 @@ class Controller:
         self.display = pygame.display.set_mode((width, height))
         
         # Load Players        
-        self.p1 = Character(P1_IDLE, self.display, P1_INITPOS[0], P1_INITPOS[1])
-        self.p2 = Character(P2_IDLE, self.display, P2_INITPOS[0], P2_INITPOS[1])
+        self.p1 = Character(P1_IDLE, P1_RUN, P1_ATTACK, P1_JUMP, P1_FALL,  self.display, P1_INITPOS[0], P1_INITPOS[1])
+        self.p2 = Character(P2_IDLE, P2_RUN, P2_ATTACK, P2_JUMP, P2_FALL, self.display, P2_INITPOS[0], P2_INITPOS[1])
+        self.players = pygame.sprite.Group(self.p1, self.p2)
         
-    #    #creating an animation list 
-    #     animation_list = []
-    #     animation_steps = [6,6,11,2,4,6,2,8]
-    #     last_update = pygame.time.get_ticks()
-    #     animation_cool = 350
-    #     frame = 0
-    #     step_counter = 0
+        self.clock = pygame.time.Clock()
+        
+       #creating an animation list 
+        animation_list = []
+        animation_steps = [6,6,11,2,4,6,2,8]
+        last_update = pygame.time.get_ticks()
+        animation_cool = 350
+        frame = 0
+        step_counter = 0
 
     #     #this basically uses the animation steps and moves it frame by frame using the step_counter for every extra frmae
-    #     for animation in animation_steps:
-    #         temp_img = []  
-    #         for _ in range(animation):
-    #             temp_img.append(SpriteSheet.get_image(step_counter, 24,24, 3, 1, YELLOW))
-    #             step_counter += 1
-    #         animation_list.append(temp_img)
-    #     print(animation_list) #theoretically if this were to work, then it would print out the movement"
-    #     run = True
-    #     while run:  
+        # for animation in animation_steps:
+        #     temp_img = []  
+        #     for _ in range(animation):
+        #         temp_img.append(SpriteSheet.get_image(step_counter, 24, 24, 3, 1, YELLOW))
+        #         step_counter += 1
+        #     animation_list.append(temp_img)
+        # print(animation_list) #theoretically if this were to work, then it would print out the movement"
+        # # run = True
+        # # while run:  
             
-    #         #updating animation
-    #         current_time = pygame.time.get_ticks()
-    #         if current_time > last_update >= animation_cool:
-    #             frame+= 1
-    #             last_update = current_time
-    #             if frame >= len(animation_list):
-    #                 frame = 0   
-    #     #show each frame image
-    #     self.display(animation_list[frame], (0 , 0)) #stopped around the part of 17:52
+        #     #updating animation
+        # current_time = pygame.time.get_ticks()
+        # if current_time > last_update >= animation_cool:
+        #         frame+= 1
+        #         last_update = current_time
+        #         if frame >= len(animation_list):
+        #             frame = 0   
+        # #show each frame image
+        # self.display(animation_list[frame], (0 , 0)) #stopped around the part of 17:52
             
         # Logic
         self.p1_wins = 0
@@ -162,12 +165,18 @@ class Controller:
         if self.p2.health_bar(p2_health_coord[0], p2_health_coord[1]) == 0:
             self.is_p1win = 1
             self.state = "ROUND"
+            
+        self.p1.update()
+        self.p2.update()
+        
+        self.players.draw(self.display)
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
         pygame.display.update()
+        self.clock.tick(30)
         '''
         Description:
             Shows the game and allows players to play when state is "GAME"

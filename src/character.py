@@ -1,21 +1,30 @@
 import pygame
+from .Spritesheet import SpriteSheet
 
 YELLOW = (255, 255, 0)
 RED = (255, 0, 0)
 WHITE = (255,255,255)
 
 class Character(pygame.sprite.Sprite):
-    def __init__(self, image, display, x = 0, y = 0, health = 100):
+    def __init__(self, idleimage, runimage, attackimage, jumpimage, fallimage, display, x = 0, y = 0, health = 100):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(str(image))
-        self.display = display
         self.x = x
         self.y = y
         self.width = 80
         self.height = 100
         self.rect = pygame.Rect((x, y, self.width, self.height))
+        self.idleimage = SpriteSheet(idleimage[0],idleimage[1],self.width,self.height).get_images()
+        self.runimage = SpriteSheet(runimage[0],runimage[1],self.width,self.height).get_images()
+        self.jumpimage = SpriteSheet(jumpimage[0],jumpimage[1],self.width,self.height).get_images()
+        self.attackimage = SpriteSheet(attackimage[0],attackimage[1],self.width,self.height).get_images()
+        self.fallimage = SpriteSheet(fallimage[0],fallimage[1],self.width,self.height).get_images()
+        self.image = None
+        self.display = display
         
         self.y_velocity = 1.5
+        
+        self.image_list = self.idleimage
+        self.image_index = 0
         
         # States
         self.is_jump = 0
@@ -84,6 +93,7 @@ class Character(pygame.sprite.Sprite):
         keypress = pygame.key.get_pressed()
         pressed = keypress[attack]
         if pressed == 1 and self.is_attack == 0:
+            self.animate(self.attackimage)
             pygame.draw.rect(self.display, (0, 255, 0), rect_attack)
             if rect_attack.colliderect(target.rect):
                 target.health -= 10
@@ -95,6 +105,17 @@ class Character(pygame.sprite.Sprite):
         pygame.draw.rect(self.display , RED , (x, y, 400, 30))
         pygame.draw.rect(self.display , YELLOW , (x, y, 400 * ratio, 30))
         return ratio
+    
+    def update(self):
+        self.image = self.image_list[self.image_index]
+        self.image_index+=1
+        if len(self.image_list) == self.image_index:
+            self.image_index = 0
+            self.image_list = self.idleimage
+            
+    def animate(self,animation):
+        self.image_index = 0
+        self.image_list = animation
     
     
     
