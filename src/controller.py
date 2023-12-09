@@ -47,23 +47,18 @@ class Controller:
         
         # Load Assets
         self.bg = pygame.image.load(BACKGROUND_IMG)
-        self.play = Button(BUTTON1_POS[0], BUTTON1_POS[1], PLAY_IMG)
-        self.quit = Button(BUTTON2_POS[0], BUTTON2_POS[1], QUIT_IMG)
-        self.replay = Button(BUTTON1_POS[0], BUTTON1_POS[1], REPLAY_IMG)
-        self.return_button = Button(BUTTON2_POS[0], BUTTON2_POS[1], RETURN_IMG)
-        self.icon = Button(ICON_POS[0], ICON_POS[1], ICON_IMG)
-        self.p1win = Button(ICON_POS[0], ICON_POS[1], P1_WIN_IMG)
-        self.p2win = Button(ICON_POS[0], ICON_POS[1], P2_WIN_IMG)
+        self.play = Button(PLAY_IMG, BUTTON1_POS[0], BUTTON1_POS[1])
+        self.quit = Button(QUIT_IMG, BUTTON2_POS[0], BUTTON2_POS[1])
+        self.replay = Button(REPLAY_IMG, BUTTON1_POS[0], BUTTON1_POS[1])
+        self.return_button = Button(RETURN_IMG, BUTTON2_POS[0], BUTTON2_POS[1])
+        self.icon = Button(ICON_IMG, ICON_POS[0], ICON_POS[1])
+        self.p1win = Button(P1_WIN_IMG, ICON_POS[0], ICON_POS[1])
+        self.p2win = Button(P2_WIN_IMG, ICON_POS[0], ICON_POS[1])
         
         # Load Display
         width = self.bg.get_width()
         height = self.bg.get_height()
         self.display = pygame.display.set_mode((width, height))
-        
-        # Load Players        
-        # self.p1 = Character(P1_IDLE, P1_RUN, P1_ATTACK, P1_JUMP, P1_FALL,  self.display, P1_INITPOS[0], P1_INITPOS[1])
-        # self.p2 = Character(P2_IDLE, P2_RUN, P2_ATTACK, P2_JUMP, P2_FALL, self.display, P2_INITPOS[0], P2_INITPOS[1])
-        # self.players = pygame.sprite.Group(self.p1, self.p2)
         
         self.clock = pygame.time.Clock()
             

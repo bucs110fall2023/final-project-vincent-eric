@@ -2,7 +2,7 @@ import pygame
 
 class Button(pygame.sprite.Sprite):
     
-    def __init__(self, x, y, image):
+    def __init__(self, image, x = 0, y = 0):
         pygame.init()
         self.image = pygame.image.load(str(image))
         self.rect = self.image.get_rect()
@@ -13,8 +13,8 @@ class Button(pygame.sprite.Sprite):
         Description:
             Initialization and variables.
         Arguments:
-            x (int): x-coordinate
-            y (int): y-coordinate
+            x (int): x-coordinate, default = 0
+            y (int): y-coordinate, defualt = 0
             image (str): the image of the button
         Return:
             None
