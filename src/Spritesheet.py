@@ -22,7 +22,6 @@ class SpriteSheet():
             
 	def get_images(self, crop_pos =(0,0)):
 		image_list = []
-	
 		for i in range(self.count):
 			image_list.append(self.get_image(i))
 		return image_list
